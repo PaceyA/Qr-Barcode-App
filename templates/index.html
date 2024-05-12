@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+<!-- Header -->
+{% block head %}
+
+{% endblock %}
+<!-- Body -->
+{% block body %} 
+<div class="content">
+<div class="container">
+<h1>QR/Barcode Code Generator</h1>
+<h4>Enter text below, select your code type from the drop down and generate!</h4>
+<form action="/" method="POST">
+    <input type="text" name="content" id="content">
+    <select name="types" id="types">
+        <option value="QR">QR code</option>
+        <option value="BARCODE39">Barcode (Code 39)</option>
+        <option value="BARCODE128">Barcode (Code 128)</option>
+    </select>
+    <input type="hidden" name="download" value="False">
+    <input type="submit" value="Generate">
+</form>
+</div>
+
+<div class="container">
+    {% if code %}
+        <img src={{code}} alt="image alt text" />
+        <h4>Here is the generated code!</h4>
+        <form action="/download" method="POST">
+            <input type="hidden" name="img" value="{{encodestr}}">
+            <input type="hidden" name="content" value="{{code_content}}">
+            <input type="submit" value="Download">
+        </form>
+    {% endif %}
+</div>
+</div>
+{% endblock %}
