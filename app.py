@@ -8,7 +8,7 @@ import base64
 from PIL import Image
 
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static')
 
 @app.route('/', methods=['POST','GET'])
 def index():
